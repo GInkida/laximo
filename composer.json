@@ -1,23 +1,24 @@
 {
-    "name": "shude/laximo",
-    "description": "PHP Library to work with LaximoOEM API",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Vladimir Tarkhanov",
-            "email": "v@kekx.ru"
-        }
-    ],
-    "require": {},
-
-    "autoload": {
-        "psr-4": { "shude\\Laximo\\": "" },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8"
+  "name": "ginkida/laximo",
+  "description": "PHP Library to work with LaximoOEM API rewrited for internal use",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vladimir Tarkhanov",
+      "email": "v@kekx.ru"
     }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "shude\\Laximo\\": ""
+    },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8"
+  }
 }
