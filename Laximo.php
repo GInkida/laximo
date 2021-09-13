@@ -3,10 +3,7 @@
 
 namespace shude\Laximo;
 
-
-use App\Models\LaximoLog;
 use shude\Laximo\Client\SoapClientInterface;
-use shude\Laximo\Objects\AftermarketDetailObject;
 use shude\Laximo\Objects\AftermarketDetailsListObject;
 use shude\Laximo\Objects\AftermarketReplacementsListObject;
 use shude\Laximo\Objects\CatalogListObject;
@@ -24,7 +21,6 @@ use shude\Laximo\Objects\VehicleListObject;
 use shude\Laximo\Objects\VehicleObject;
 use shude\Laximo\Objects\WizardNextStep;
 use shude\Laximo\Objects\WizardObject;
-use shude\Laximo\Objects\WizardStepObject;
 use shude\Laximo\Query\Query;
 use shude\Laximo\Query\QueryBuilderInterface;
 
@@ -468,21 +464,8 @@ class Laximo
         $data = $this->client->executeQuery($query);
 
         $data = simplexml_load_string($data);
-
-        try {
-            $this->logging(
-                [
-                    'request'     => $query,
-                    'response'    => json_encode($data),
-                    'method'      => $method,
-                    'description' => self::$descriptions[$method],
-                ]
-            );
-        } catch (\Exception $exception) {
-
-        }
-
         $result = [];
+
         if ($data && method_exists(get_class($data), 'children')) {
             foreach ($data->children() as $row) {
                 $result[] = $row;
@@ -496,17 +479,5 @@ class Laximo
         }
 
         return $objects;
-    }
-
-    public function logging(array $data)
-    {
-        LaximoLog::create(
-            [
-                'method'      => $data['method'],
-                'requests'    => $data['request'],
-                'responses'   => $data['response'],
-                'description' => $data['description'],
-            ]
-        );
     }
 }
